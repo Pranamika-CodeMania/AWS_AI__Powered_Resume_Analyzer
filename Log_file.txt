@@ -1,0 +1,16 @@
+INIT_START Runtime Version: python:3.9.v82	Runtime Version ARN: arn:aws:lambda:us-west-2::runtime:d6dc717114b06da7d4b5a2df328222709ec4fad2853004fac301b8b63a65c084
+[INFO]	2025-04-05T18:49:31.748Z		Found credentials in environment variables.
+START RequestId: afb3b411-e42d-4643-8f28-6cc51ba7866c Version: $LATEST
+[INFO]	2025-04-05T18:49:31.994Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 🚀 Lambda invoked | Request ID: afb3b411-e42d-4643-8f28-6cc51ba7866c
+[INFO]	2025-04-05T18:49:31.994Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 📂 Using hardcoded file key: Pranamika Paul_Cloud_Backend_AWS_AI_Engineer.png
+[INFO]	2025-04-05T18:49:31.994Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 📦 Fetching file from S3 bucket: resume-analyzer-container
+[INFO]	2025-04-05T18:49:32.347Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 🧠 Extracting text with Textract...
+[INFO]	2025-04-05T18:49:34.109Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] ✅ Text extraction complete. Length: 1420 characters
+[INFO]	2025-04-05T18:49:34.109Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 🔍 Running NLP analysis with Amazon Comprehend...
+[INFO]	2025-04-05T18:49:34.407Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] ✅ NLP analysis complete. Entities found: 46
+[INFO]	2025-04-05T18:49:34.407Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] 🤖 Sending text to Bedrock for feedback generation...
+[INFO]	2025-04-05T18:49:43.475Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] ✅ Bedrock feedback received.
+[INFO]	2025-04-05T18:49:43.475Z	afb3b411-e42d-4643-8f28-6cc51ba7866c	[2025-04-05T18:49:31.994124] ✅ Lambda completed successfully.
+END RequestId: afb3b411-e42d-4643-8f28-6cc51ba7866c
+REPORT RequestId: afb3b411-e42d-4643-8f28-6cc51ba7866c	Duration: 11493.22 ms	Billed Duration: 11494 ms	Memory Size: 128 MB	Max Memory Used: 89 MB	Init Duration: 570.17 ms	
+
