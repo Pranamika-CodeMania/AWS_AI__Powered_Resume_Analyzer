@@ -91,10 +91,10 @@ Example:- https://your-api-id.execute-api.region.amazonaws.com/resume
 ## 📸 Screenshots
 
 > Add these manually after deployment:
-- ✅ [Lambda Console with function logs](Screenshots/Lambda_console_logs.png)
+- ✅ [Lambda Console with function logs](Lambda_console_logs.png)
 - ✅ Bedrock invocation example
 - ✅ Comprehend output screenshot
-- ✅ [S3 bucket upload trigger UI](Screenshots/s3_trigger.png)
+- ✅ [S3 bucket upload trigger UI](s3_trigger.png)
 
 ---
 
