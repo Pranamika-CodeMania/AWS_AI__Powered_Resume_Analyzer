@@ -92,9 +92,11 @@ Example:- https://your-api-id.execute-api.region.amazonaws.com/resume
 
 > Add these manually after deployment:
 - ✅ [Lambda Console with function logs](Lambda_console_logs.png)
-- ✅ Bedrock invocation example
-- ✅ Comprehend output screenshot
-- ✅ [S3 bucket upload trigger UI](s3_trigger.png)
+- ✅ [Bedrock invocation example](BedRock_Invocation.png)
+- ✅ [Comprehend output screenshot](Comprehend_output.png)
+- ✅ [S3 bucket upload trigger UI](s3_trigger.png)![BedRock_Invocation](https://github.com/user-attachments/assets/a3e7a755-34f2-4374-844e-aa3fc83076bc)
+![Comprehend_output](https://github.com/user-attachments/assets/6a8511aa-1834-4729-93e1-b99a06c27036)
+
 
 ---
 
