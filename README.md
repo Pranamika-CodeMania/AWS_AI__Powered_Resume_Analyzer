@@ -1,7 +1,7 @@
 
 # 🤖 AI-Powered Resume Analyzer using AWS Lambda, AWS Bedrock, Textract & Comprehend
 
-A cloud-native serverless project built entirely on the **AWS Free Tier**, this application extracts resume content from images or PDFs uploaded to an S3 bucket and analyzes them using **Amazon Textract**,**Amazon Lambda**, **Amazon Comprehend**, and **Amazon Bedrock** (Claude v2) to generate AI-driven resume improvement feedback. Accessible and scalable!
+A cloud-native serverless project built entirely on the **AWS Free Tier**, this application extracts resume content from images or PDFs uploaded to an S3 bucket and analyzes them using **Amazon Textract**,**Amazon Lambda**, **Amazon Comprehend**, and **Amazon Bedrock** (Claude 2.1) to generate AI-driven resume improvement feedback. Accessible and scalable!
 
 ---
 
@@ -31,7 +31,7 @@ This project helps job seekers enhance their resumes by:
 
 ## 🧩 Architecture Diagram
 
-![AI Resume Analyzer Architecture](./architecture_diagram.png)
+[AI Resume Analyzer Architecture](./architecture_diagram.png)
 
 ---
 
@@ -51,29 +51,106 @@ Here’s a simplified view of what happens in the code:
 
 ## 💻 How to Deploy (Step-by-Step)
 
-### 🪜 Step 1: Set Up AWS Free Tier
-- Create AWS account.
-- Create IAM user with access to:
-  - S3, Lambda, Textract, Comprehend, Bedrock, and optionally Lex
+---
 
-### 🪜 Step 2: Create an S3 Bucket
-- Name it: `resume-analyzer-container`
-- Uncheck "Block Public Access"
-- Enable upload event notifications (optional)
+### 🪜 Step 1: Set Up Your AWS Account
+- Sign up at [https://aws.amazon.com](https://aws.amazon.com) (Free Tier is fine)
+- Create an **IAM User** with permissions for:
+- [S3, Lambda, Textract, Comprehend, Bedrock] File [iam_roles.md]
+- You can use `AdministratorAccess` for quick setup (not recommended for production)
+![architecture_diagram](https://github.com/user-attachments/assets/fe607eda-c137-4800-8a63-0014a58176e2)
 
-### 🪜 Step 3: Create Lambda Function
-- Runtime: Python 3.9
-- Upload `lambda_function.py` (provided)
-- Give permission to access S3, Textract, Comprehend, Bedrock
-- Add S3 as an **event trigger**
+---
 
-### 🪜 Step 4: Connect API Gateway (optional)
-- Create REST API
-- POST method → triggers Lambda
-- Deploy and get endpoint URL
+### 🪜 Step 2: Create an S3 Bucket -- File [s3_bucket_config.md]
+This is where resumes are uploaded.
+1. Go to **S3 Console**
+2. Click **Create bucket**
+3. Name it: `resume-analyzer-container`
+4. Uncheck **“Block all public access”**
+5. Click **Create**
+6. (Optional) Set up **Event Notification** to trigger Lambda on upload
 
-### 🪜 Step 5: Optional Lex Bot Integration
-- Create chatbot that invokes Lambda for natural language feedback interaction
+---
+
+### 🪜 Step 3: Create Your Lambda Function -- File [lambda_function.py]
+This handles all the backend logic.
+
+1. Go to **Lambda Console**
+2. Click **Create function**
+3. Choose:
+   - **Author from scratch**
+   - Runtime: **Python 3.9**
+4. Upload your Lambda code (from `lambda/resumeAnalyzer_pranamika/lambda_function.py`)
+5. Assign permissions:
+   - S3: `GetObject`
+   - Textract: `DetectDocumentText`
+   - Comprehend: `DetectEntities`, `DetectKeyPhrases`
+   - Bedrock: `InvokeModel`
+6. Set up an **S3 trigger**:
+   - Trigger Lambda when a new file is uploaded to the bucket
+
+---
+
+### 🪜 Step 4: (Optional) Set Up API Gateway
+To call Lambda via HTTP:
+1. Go to **API Gateway**
+2. Create **REST API**
+3. Set up a **POST method** connected to your Lambda
+4. Deploy and note the **public URL**
+
+---
+
+### 🪜 Step 5: Test the Flow -- File [Test_file.md]
+1. Upload a PDF/image resume to the S3 bucket
+2. Lambda will:
+   - Extract text via **Textract**
+   - Identify entities/skills using **Comprehend**
+   - Generate resume feedback using **Claude (Bedrock)**
+3. The output will include:
+   - Raw text
+   - Skills list
+   - Smart feedback
+
+---
+
+## 🧪 Sample Output  [\sample_output.md]
+```json
+{
+  "resume_text": "Experienced Cloud Engineer with AWS & DevOps background...",
+  "skills": [
+    { "Text": "AWS", "Type": "ORGANIZATION" },
+    { "Text": "DevOps", "Type": "OTHER" }
+  ],
+  "feedback": "You can improve your resume by detailing certifications and quantifying project impact..."
+}
+```
+
+---
+
+## 🗂 Files You Need to Upload
+- `lambda_function.py` → For your Lambda function
+- `requirements.txt` (optional) → Only needed if you deploy via CLI with dependencies
+- `resumeAnalyzer_pranamika.yaml` → CloudFormation script (optional)
+- `architecture_diagram.png` → For documentation
+
+---
+
+## ✅ Deployment Checklist
+
+- [x] AWS Free Tier account setup
+- [x] S3 bucket created and permissions set
+- [x] Lambda function deployed and triggered by S3
+- [x] Textract, Comprehend, and Bedrock permissions granted
+- [ ] (Optional) API Gateway and/or Lex bot integration
+
+---
+
+If you'd like, I can give you:
+- ✅ Sample Lambda code walk-through  
+- ✅ CloudFormation script to automate deployment  
+
+Let me know how deep you want to go!
 
 ---
 
@@ -94,9 +171,7 @@ Example:- https://your-api-id.execute-api.region.amazonaws.com/resume
 - ✅ [Lambda Console with function logs](Lambda_console_logs.png)
 - ✅ [Bedrock invocation example](BedRock_Invocation.png)
 - ✅ [Comprehend output screenshot](Comprehend_output.png)
-- ✅ [S3 bucket upload trigger UI](s3_trigger.png)![BedRock_Invocation](https://github.com/user-attachments/assets/a3e7a755-34f2-4374-844e-aa3fc83076bc)
-![Comprehend_output](https://github.com/user-attachments/assets/6a8511aa-1834-4729-93e1-b99a06c27036)
-
+- ✅ [S3 bucket upload trigger UI](s3_trigger.png)
 
 ---
 
@@ -112,9 +187,6 @@ Example:- https://your-api-id.execute-api.region.amazonaws.com/resume
   "feedback": "You can improve your resume by detailing certifications and quantifying project impact..."
 }
 ```
-
----
-
 ## 📁 Folder Structure
 
 ```
@@ -155,7 +227,7 @@ Cloud | Backend | AWS AI Engineer
 Code is located in `lambda/lambda_function.py`.
 
 
-🔧 Tools & AWS Services Used (All in Free Tier):
+##🔧 Tools & AWS Services Used (All in Free Tier):
 
 Service	Purpose
 Amazon S3	Store uploaded resumes
@@ -166,7 +238,7 @@ Amazon Lex	Creates an interactive chatbot for resume feedback
 API Gateway	Creates an HTTP endpoint to trigger resume processing
 IAM	Securely control permissions across services
 
-⚙️ Workflow Summary
+##⚙️ Workflow Summary
 
 Upload Resumes → to S3
 
@@ -180,7 +252,7 @@ Store Results → In a database
 
 Display Output → Via API or UI dashboard
 
-✅ Benefits
+##✅ Benefits
 
 Reduces HR screening workload
 
